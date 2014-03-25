@@ -13,7 +13,8 @@
     elements: [],
     percentage: true,
     userTiming: true,
-    pixelDepth: true
+    pixelDepth: true,
+    labelPrefix:""
   };
 
   var $window = $(window),
