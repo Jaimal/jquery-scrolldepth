@@ -63,54 +63,7 @@
      */
 
     function sendEvent(action, label, scrollDistance, timing) {
-
-      if (googleTagManager) {
-
-        dataLayer.push({'event': 'ScrollDistance', 'eventCategory': 'Scroll Depth', 'eventAction': action, 'eventLabel': label, 'eventValue': 1, 'eventNonInteraction': true});
-
-        if (options.pixelDepth && arguments.length > 2 && scrollDistance > lastPixelDepth) {
-          lastPixelDepth = scrollDistance;
-          dataLayer.push({'event': 'ScrollDistance', 'eventCategory': 'Scroll Depth', 'eventAction': 'Pixel Depth', 'eventLabel': rounded(scrollDistance), 'eventValue': 1, 'eventNonInteraction': true});
-        }
-
-        if (options.userTiming && arguments.length > 3) {
-          dataLayer.push({'event': 'ScrollTiming', 'eventCategory': 'Scroll Depth', 'eventAction': action, 'eventLabel': label, 'eventTiming': timing});
-        }
-
-      } else {
-
-        if (universalGA) {
-
-          ga('send', 'event', 'Scroll Depth', action, label, 1, {'nonInteraction': 1});
-
-          if (options.pixelDepth && arguments.length > 2 && scrollDistance > lastPixelDepth) {
-            lastPixelDepth = scrollDistance;
-            ga('send', 'event', 'Scroll Depth', 'Pixel Depth', rounded(scrollDistance), 1, {'nonInteraction': 1});
-          }
-
-          if (options.userTiming && arguments.length > 3) {
-            ga('send', 'timing', 'Scroll Depth', action, timing, label);
-          }
-
-        }
-
-        if (classicGA) {
-
-          _gaq.push(['_trackEvent', 'Scroll Depth', action, label, 1, true]);
-
-          if (options.pixelDepth && arguments.length > 2 && scrollDistance > lastPixelDepth) {
-            lastPixelDepth = scrollDistance;
-            _gaq.push(['_trackEvent', 'Scroll Depth', 'Pixel Depth', rounded(scrollDistance), 1, true]);
-          }
-
-          if (options.userTiming && arguments.length > 3) {
-            _gaq.push(['_trackTiming', 'Scroll Depth', action, timing, label, 100]);
-          }
-
-        }
-
-      }
-
+        mixpanel.track("ppc "+label);
     }
 
     function calculateMarks(docHeight) {
