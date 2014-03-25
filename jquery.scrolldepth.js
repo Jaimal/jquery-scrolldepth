@@ -18,10 +18,7 @@
 
   var $window = $(window),
     cache = [],
-    lastPixelDepth = 0,
-    universalGA,
-    classicGA,
-    googleTagManager;
+    lastPixelDepth = 0;
 
   /*
    * Plugin
@@ -36,23 +33,6 @@
     // Return early if document height is too small
     if ( $(document).height() < options.minHeight ) {
       return;
-    }
-
-    /*
-     * Determine which version of GA is being used
-     * "ga", "_gaq", and "dataLayer" are the possible globals
-     */
-
-    if (typeof ga === "function") {
-      universalGA = true;
-    }
-
-    if (typeof _gaq !== "undefined" && typeof _gaq.push === "function") {
-      classicGA = true;
-    }
-
-    if (typeof dataLayer !== "undefined" && typeof dataLayer.push === "function") {
-      googleTagManager = true;
     }
 
     // Establish baseline (0% scroll)
