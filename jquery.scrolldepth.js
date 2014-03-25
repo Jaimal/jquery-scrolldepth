@@ -63,7 +63,7 @@
      */
 
     function sendEvent(action, label, scrollDistance, timing) {
-        mixpanel.track(action + " "+label);
+        mixpanel.track(label);
     }
 
     function calculateMarks(docHeight) {
@@ -71,7 +71,6 @@
         '25%' : parseInt(docHeight * 0.25, 10),
         '50%' : parseInt(docHeight * 0.50, 10),
         '75%' : parseInt(docHeight * 0.75, 10),
-        // 1px cushion to trigger 100% event in iOS
         '90%': parseInt(docHeight * 0.9, 10),
       };
     }
@@ -80,7 +79,7 @@
       // Check each active mark
       $.each(marks, function(key, val) {
         if ( $.inArray(key, cache) === -1 && scrollDistance >= val ) {
-          sendEvent('PPC', key, scrollDistance, timing);
+          sendEvent('Percentage', key, scrollDistance, timing);
           cache.push(key);
         }
       });
